@@ -37,7 +37,7 @@ const githubSlice = createSlice({
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload
     },
-    setError: (state, action: PayloadAction<string>) => {
+    setError: (state, action: PayloadAction<string | null>) => {
       state.error = action.payload
       state.isLoading = false
     },
@@ -46,4 +46,3 @@ const githubSlice = createSlice({
 
 export const { setConnected, setCommits, setStats, setLoading, setError } = githubSlice.actions
 export default githubSlice.reducer
-

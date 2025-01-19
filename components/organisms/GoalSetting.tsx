@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import {useState, useEffect, JSX} from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
@@ -15,7 +15,6 @@ import { RequiredGoal } from '@/types'
 import { useGeminiAI } from '@/hooks/useGeminiAI'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/lib/store'
-import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 
 const goalSchema = z.object({
   title: z.string().min(1, 'Title is required'),
@@ -31,10 +30,10 @@ const goalSchema = z.object({
 type GoalFormValues = z.infer<typeof goalSchema>
 
 interface GoalSettingProps {
-  setIsLoading: (isLoading: boolean) => void;
+  setIsLoadingAction: (isLoading: boolean) => void;
 }
 
-export function GoalSetting({ setIsLoading }: GoalSettingProps): JSX.Element {
+export function GoalSetting({ setIsLoadingAction }: GoalSettingProps): JSX.Element {
   const [aiSuggestions, setAiSuggestions] = useState<string[]>([])
   const { generateGoalSuggestions, isLoading: isAiLoading } = useGeminiAI()
   const { currentUser } = useSelector((state: RootState) => state.user)
@@ -55,8 +54,8 @@ export function GoalSetting({ setIsLoading }: GoalSettingProps): JSX.Element {
   }, [])
 
   useEffect(() => {
-    setIsLoading(isAiLoading)
-  }, [isAiLoading, setIsLoading])
+    setIsLoadingAction(isAiLoading)
+  }, [isAiLoading, setIsLoadingAction])
 
   async function generateAiSuggestions() {
     const userData = {
@@ -72,7 +71,7 @@ export function GoalSetting({ setIsLoading }: GoalSettingProps): JSX.Element {
   }
 
   async function onSubmit(data: GoalFormValues): Promise<void> {
-    setIsLoading(true)
+    setIsLoadingAction(true)
     try {
       const response = await fetch('/api/goals', {
         method: 'POST',
@@ -103,7 +102,7 @@ export function GoalSetting({ setIsLoading }: GoalSettingProps): JSX.Element {
         variant: 'destructive',
       })
     } finally {
-      setIsLoading(false)
+      setIsLoadingAction(false)
     }
   }
 
