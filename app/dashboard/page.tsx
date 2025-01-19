@@ -21,19 +21,19 @@ export default function DashboardPage() {
       <Layout isLoading={isLoading}>
         <h1 className="text-3xl font-bold mb-8">Dashboard</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <DailyLog setIsLoading={setIsLoading} />
-          <GitHubIntegration setIsLoading={setIsLoading} />
+          <DailyLog setIsLoadingAction={setIsLoading} />
+          <GitHubIntegration setIsLoadingAction={setIsLoading} />
         </div>
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
           <Badges setIsLoading={setIsLoading} />
           <Leaderboard setIsLoading={setIsLoading} />
         </div>
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-          <GoalSetting setIsLoading={setIsLoading} />
+          <GoalSetting setIsLoadingAction={setIsLoading} />
           <ProgressTracking setIsLoading={setIsLoading} />
         </div>
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-          <SearchEntries setIsLoading={setIsLoading} />
+          <SearchEntries setIsLoadingAction={setIsLoading} />
           <LearningRecommendations />
         </div>
       </Layout>

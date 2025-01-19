@@ -11,14 +11,16 @@ const genAI = new GoogleGenerativeAI(apiKey);
 export async function POST(req: NextRequest) {
   try {
     const { prompt } = await req.json();
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro-latest" });
+
+    // Use the correct model name directly
+    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
 
     const result = await model.generateContent(prompt);
-    const response = result.response.text();
+    const response = result.response.text;
 
     return NextResponse.json({ response });
   } catch (error) {
-    console.error('Error in Gemini API:', error);
-    return NextResponse.json({ error: 'Failed to process request' }, { status: 500 });
+    console.error('Error in Gemini API:', (error as Error).message);
+    return NextResponse.json({ error: 'Failed to process request', details: (error as Error).message }, { status: 500 });
   }
 }

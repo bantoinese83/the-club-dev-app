@@ -4,7 +4,7 @@ import prisma from '@/lib/prisma'
 
 export async function GET() {
   try {
-    const sessionCookie = cookies().get('session')
+    const sessionCookie = (await cookies()).get('session')
     
     if (!sessionCookie) {
       return NextResponse.json({ success: false, error: 'Not authenticated' }, { status: 401 })
@@ -25,7 +25,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    const sessionCookie = cookies().get('session')
+    const sessionCookie = (await cookies()).get('session')
     
     if (!sessionCookie) {
       return NextResponse.json({ success: false, error: 'Not authenticated' }, { status: 401 })

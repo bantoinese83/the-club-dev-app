@@ -1,20 +1,19 @@
 'use client'
-
-import {useState, useEffect, JSX} from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import * as z from 'zod'
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
-import { Button } from '@/components/ui/button'
-import { toast } from '@/components/ui/use-toast'
-import { Loader2, Lightbulb } from 'lucide-react'
-import { RequiredGoal } from '@/types'
-import { useGeminiAI } from '@/hooks/useGeminiAI'
-import { useSelector } from 'react-redux'
-import { RootState } from '@/lib/store'
+import { useRef, useState, useEffect, JSX } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Button } from '@/components/ui/button';
+import { toast } from '@/components/ui/use-toast';
+import { Loader2, Lightbulb } from 'lucide-react';
+import { RequiredGoal } from '@/types';
+import { useGeminiAI } from '@/hooks/useGeminiAI';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/lib/store';
 
 const goalSchema = z.object({
   title: z.string().min(1, 'Title is required'),
@@ -25,19 +24,19 @@ const goalSchema = z.object({
   endDate: z.string().refine((date) => !isNaN(Date.parse(date)), {
     message: 'End date must be a valid date',
   }),
-})
+});
 
-type GoalFormValues = z.infer<typeof goalSchema>
+type GoalFormValues = z.infer<typeof goalSchema>;
 
 interface GoalSettingProps {
   setIsLoadingAction: (isLoading: boolean) => void;
 }
 
 export function GoalSetting({ setIsLoadingAction }: GoalSettingProps): JSX.Element {
-  const [aiSuggestions, setAiSuggestions] = useState<string[]>([])
-  const { generateGoalSuggestions, isLoading: isAiLoading } = useGeminiAI()
-  const { currentUser } = useSelector((state: RootState) => state.user)
-  const { logs } = useSelector((state: RootState) => state.dailyLog)
+  const [aiSuggestions, setAiSuggestions] = useState<string[]>([]);
+  const { generateGoalSuggestions, isLoading: isAiLoading } = useGeminiAI();
+  const { currentUser } = useSelector((state: RootState) => state.user);
+  const { logs } = useSelector((state: RootState) => state.dailyLog);
 
   const form = useForm<GoalFormValues>({
     resolver: zodResolver(goalSchema),
@@ -47,67 +46,69 @@ export function GoalSetting({ setIsLoadingAction }: GoalSettingProps): JSX.Eleme
       startDate: new Date().toISOString().split('T')[0],
       endDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
     },
-  })
+  });
+
+  const myRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    generateAiSuggestions()
-  }, [])
+    generateAiSuggestions();
+  }, []);
 
   useEffect(() => {
-    setIsLoadingAction(isAiLoading)
-  }, [isAiLoading, setIsLoadingAction])
+    setIsLoadingAction(isAiLoading);
+  }, [isAiLoading, setIsLoadingAction]);
 
   async function generateAiSuggestions() {
     const userData = {
       name: currentUser?.name,
       email: currentUser?.email,
       streak: currentUser?.streak,
-      recentLogs: logs.slice(0, 5).map(log => log.content).join('\n'),
-    }
-    const suggestions = await generateGoalSuggestions(JSON.stringify(userData))
+      recentLogs: logs.slice(0, 5).map((log) => log.content).join('\n'),
+    };
+    const suggestions = await generateGoalSuggestions(JSON.stringify(userData));
     if (suggestions) {
-      setAiSuggestions(suggestions.split('\n').filter(Boolean))
+      setAiSuggestions(suggestions.split('\n').filter(Boolean));
     }
   }
 
   async function onSubmit(data: GoalFormValues): Promise<void> {
-    setIsLoadingAction(true)
+    setIsLoadingAction(true);
     try {
       const response = await fetch('/api/goals', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
-      })
-      const result = await response.json()
+      });
+      const result = await response.json();
       if (result.success) {
         const newGoal: RequiredGoal = {
           ...result.goal,
           description: result.goal.description || '',
           status: 'NOT_STARTED',
           progress: 0,
-        }
+        };
         toast({
           title: 'Goal Created',
           description: 'Your new goal has been successfully created.',
-        })
-        form.reset()
-        generateAiSuggestions()
+        });
+        form.reset();
+        generateAiSuggestions();
       } else {
-        throw new Error(result.error)
+        throw new Error(result.error);
       }
     } catch (error) {
       toast({
         title: 'Error',
         description: 'Failed to create goal. Please try again.',
         variant: 'destructive',
-      })
+      });
     } finally {
-      setIsLoadingAction(false)
+      setIsLoadingAction(false);
     }
   }
 
   return (
-    <Card>
+    <Card ref={myRef}>
       <CardHeader>
         <CardTitle>Set a New Goal</CardTitle>
       </CardHeader>
@@ -193,5 +194,5 @@ export function GoalSetting({ setIsLoadingAction }: GoalSettingProps): JSX.Eleme
         )}
       </CardContent>
     </Card>
-  )
+  );
 }

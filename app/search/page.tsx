@@ -13,7 +13,7 @@ export default function SearchPage() {
     <AuthGuard>
       <Layout isLoading={isLoading}>
         <h1 className="text-3xl font-bold mb-8">Search Entries</h1>
-        <SearchEntries setIsLoading={setIsLoading} />
+        <SearchEntries setIsLoadingAction={setIsLoading} />
       </Layout>
     </AuthGuard>
   )
