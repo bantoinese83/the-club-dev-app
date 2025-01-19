@@ -39,6 +39,11 @@ export interface Badge {
 export interface GitHubStats {
   totalCommits: number;
   commitsThisWeek: number;
+  publicRepos: number;
+  followers: number;
+  following: number;
+  totalStars: number;
+  totalForks: number;
 }
 
 export interface Commit {
