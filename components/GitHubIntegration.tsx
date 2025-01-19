@@ -19,6 +19,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { AlertCircle, CheckCircle2 } from 'lucide-react'
 import { RootState } from '@/lib/store'
 import { setConnected, setCommits, setLoading, setError } from '@/features/github/githubSlice'
+import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 
 interface GitHubIntegrationProps {
   setIsLoading: (isLoading: boolean) => void;
@@ -163,4 +164,3 @@ export default function GitHubIntegration({ setIsLoading }: GitHubIntegrationPro
     </Card>
   )
 }
-

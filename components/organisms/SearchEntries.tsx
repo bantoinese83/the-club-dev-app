@@ -18,6 +18,7 @@ import { DatePicker } from '@/components/ui/date-picker'
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
 import { DailyLogEntry, Tag, ReadonlyDailyLogEntry, TagRecord } from '@/types'
+import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 
 interface DailyLogEntry {
   id: string;
