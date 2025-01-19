@@ -15,6 +15,7 @@ import { RequiredGoal } from '@/types'
 import { useGeminiAI } from '@/hooks/useGeminiAI'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/lib/store'
+import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect'
 
 const goalSchema = z.object({
   title: z.string().min(1, 'Title is required'),
