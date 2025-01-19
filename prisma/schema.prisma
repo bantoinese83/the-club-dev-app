@@ -1,0 +1,84 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  password      String
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  dailyLogs     DailyLog[]
+  githubProfile GithubProfile?
+  badges        Badge[]
+  streak        Int       @default(0)
+  lastLogDate   DateTime?
+  goals         Goal[]
+  tags          Tag[]
+}
+
+model DailyLog {
+  id        String   @id @default(cuid())
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  tags      Tag[]
+  sentiment String?
+}
+
+model GithubProfile {
+  id           String @id @default(cuid())
+  accessToken  String
+  refreshToken String?
+  userId       String @unique
+  user         User   @relation(fields: [userId], references: [id])
+}
+
+model Badge {
+  id          String @id @default(cuid())
+  name        String
+  description String
+  image       String
+  userId      String
+  user        User   @relation(fields: [userId], references: [id])
+}
+
+model Goal {
+  id          String     @id @default(cuid())
+  title       String
+  description String?
+  startDate   DateTime
+  endDate     DateTime
+  status      GoalStatus
+  progress    Int        @default(0)
+  userId      String
+  user        User       @relation(fields: [userId], references: [id])
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model Tag {
+  id        String     @id @default(cuid())
+  name      String
+  userId    String
+  user      User       @relation(fields: [userId], references: [id])
+  dailyLogs DailyLog[]
+
+  @@unique([name, userId])
+}
+
+enum GoalStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
+}
+
