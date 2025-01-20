@@ -17,6 +17,7 @@ export function SignUpForm({
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isVisible, setIsVisible] = useState(true);
   const { toast } = useToast();
   const { signup, loginWithProvider } = useAuth();
 
@@ -32,6 +33,7 @@ export function SignUpForm({
         title: 'Account created',
         description: "We've created your account for you.",
       });
+      setIsVisible(false);
     } else {
       toast({
         title: 'Sign Up Failed',
@@ -53,6 +55,10 @@ export function SignUpForm({
       });
     }
   };
+
+  if (!isVisible) {
+    return null;
+  }
 
   return (
     <form

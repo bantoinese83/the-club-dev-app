@@ -35,7 +35,7 @@ export async function POST(request: Request) {
       path: '/',
     });
 
-    return NextResponse.json({ success: true, user: userWithoutPassword });
+    return NextResponse.redirect(`${process.env.NEXT_PUBLIC_APP_URL}/dashboard`);
   } catch (error) {
     console.error('Signup error:', error);
     return NextResponse.json(
