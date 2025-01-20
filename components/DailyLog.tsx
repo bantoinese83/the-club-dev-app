@@ -165,7 +165,7 @@ export default function DailyLog({ setIsLoadingAction }: DailyLogProps): JSX.Ele
         <div className="mb-4">
           <p className="text-lg font-semibold">Current Streak: <span className="text-primary">{currentUser?.streak || 0} days</span></p>
         </div>
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form id="daily-log-form" onSubmit={handleSubmit} className="space-y-4">
           <Textarea
             value={logEntry}
             onChange={(e) => setLogEntry(e.target.value)}
