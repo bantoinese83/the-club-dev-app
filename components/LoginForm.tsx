@@ -17,6 +17,7 @@ export function LoginForm({
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isVisible, setIsVisible] = useState(true);
   const { toast } = useToast();
   const { login, loginWithProvider } = useAuth();
 
@@ -32,6 +33,7 @@ export function LoginForm({
         title: 'Login Successful',
         description: 'You have been logged in successfully.',
       });
+      setIsVisible(false);
     } else {
       toast({
         title: 'Login Failed',
@@ -53,6 +55,10 @@ export function LoginForm({
       });
     }
   };
+
+  if (!isVisible) {
+    return null;
+  }
 
   return (
     <form
