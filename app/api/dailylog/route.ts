@@ -75,10 +75,10 @@ export async function GET(): Promise<NextResponse> {
 
     const user = JSON.parse(sessionCookie.value) as User
     const dailyLogs = await prisma.dailyLog.findMany({
-      where: { userId: user.id },
-      orderBy: { createdAt: 'desc' },
-      include: { tags: true },
-    }) as DailyLogEntry[]
+      where: {userId: user.id},
+      orderBy: {createdAt: 'desc'},
+      include: {tags: true},
+    }) as unknown as DailyLogEntry[]
 
     return NextResponse.json({ success: true, dailyLogs })
   } catch (error) {

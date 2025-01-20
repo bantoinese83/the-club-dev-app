@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 
 export default function ProfilePage() {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading] = useState(false)
 
   return (
     <AuthGuard>

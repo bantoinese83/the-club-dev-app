@@ -10,7 +10,7 @@ import {Button} from "@/components/ui/button"
 
 
 export default function SettingsPage() {
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading] = useState(false)
 
     return (
         <AuthGuard>
