@@ -236,7 +236,7 @@ export default function DailyLog({ setIsLoadingAction }: DailyLogProps): JSX.Ele
               <p>{log.content}</p>
               <div className="flex items-center mt-1">
                 <TagIcon className="h-4 w-4 mr-1" />
-                {log.tags.map((tag) => (
+                {log.tags && log.tags.map((tag) => (
                   <Badge key={tag.id} variant="secondary" className="mr-1">
                     {tag.name}
                   </Badge>
