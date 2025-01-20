@@ -17,11 +17,12 @@ export function Button({ variant = 'primary', size = 'md', className = '', ...pr
     lg: 'px-6 py-3 text-lg',
   }
 
+  const responsiveStyles = 'w-full md:w-auto'
+
   return (
     <button
-      className={`${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`}
+      className={`${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${responsiveStyles} ${className}`}
       {...props}
     />
   )
 }
-
