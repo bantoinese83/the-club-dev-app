@@ -1,13 +1,13 @@
-"use client"
+'use client';
 
-import { AuthGuard } from '@/components/AuthGuard'
-import Layout from '@/components/templates/Layout'
-import { GoalSetting } from '@/components/organisms/GoalSetting'
-import { ProgressTracking } from '@/components/organisms/ProgressTracking'
-import { useState } from 'react'
+import { AuthGuard } from '@/components/AuthGuard';
+import Layout from '@/components/templates/Layout';
+import { GoalSetting } from '@/components/organisms/GoalSetting';
+import { ProgressTracking } from '@/components/organisms/ProgressTracking';
+import { useState } from 'react';
 
 export default function GoalsPage() {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <AuthGuard>
@@ -19,5 +19,5 @@ export default function GoalsPage() {
         </div>
       </Layout>
     </AuthGuard>
-  )
+  );
 }

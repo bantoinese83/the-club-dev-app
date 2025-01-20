@@ -31,12 +31,30 @@ export function useGeminiAI() {
   };
 
   const generateInsights = (prompt: string) => generateContent(prompt);
-  const reviewCode = (code: string) => generateContent(`Review the following code and provide suggestions for improvement:\n\n${code}`);
-  const generateLearningRecommendations = (logs: string) => generateContent(`Based on the following daily logs, suggest learning topics and resources:\n\n${logs}`);
-  const generateGoalSuggestions = (userData: string) => generateContent(`Based on the following user data, suggest appropriate goals:\n\n${userData}`);
-  const analyzeSentiment = (log: string) => generateContent(`Analyze the sentiment of the following daily log entry:\n\n${log}`);
-  const generateProjectName = (description: string) => generateContent(`Generate a creative and catchy project name for a GitHub repository with the following description:\n\n${description}`);
-  const generateTags = (log: string) => generateContent(`Suggest relevant tags for the following daily log entry:\n\n${log}`);
+  const reviewCode = (code: string) =>
+    generateContent(
+      `Review the following code and provide suggestions for improvement:\n\n${code}`,
+    );
+  const generateLearningRecommendations = (logs: string) =>
+    generateContent(
+      `Based on the following daily logs, suggest learning topics and resources:\n\n${logs}`,
+    );
+  const generateGoalSuggestions = (userData: string) =>
+    generateContent(
+      `Based on the following user data, suggest appropriate goals:\n\n${userData}`,
+    );
+  const analyzeSentiment = (log: string) =>
+    generateContent(
+      `Analyze the sentiment of the following daily log entry:\n\n${log}`,
+    );
+  const generateProjectName = (description: string) =>
+    generateContent(
+      `Generate a creative and catchy project name for a GitHub repository with the following description:\n\n${description}`,
+    );
+  const generateTags = (log: string) =>
+    generateContent(
+      `Suggest relevant tags for the following daily log entry:\n\n${log}`,
+    );
 
   return {
     generateInsights,
@@ -50,4 +68,3 @@ export function useGeminiAI() {
     error,
   };
 }
-

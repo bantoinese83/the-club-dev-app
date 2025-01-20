@@ -1,13 +1,12 @@
-"use client"
+'use client';
 
-import { useState } from 'react'
-import { AuthGuard } from '@/components/AuthGuard'
-import Layout from '@/components/templates/Layout'
-import { SearchEntries } from '@/components/organisms/SearchEntries'
-
+import { useState } from 'react';
+import { AuthGuard } from '@/components/AuthGuard';
+import Layout from '@/components/templates/Layout';
+import { SearchEntries } from '@/components/organisms/SearchEntries';
 
 export default function SearchPage() {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <AuthGuard>
@@ -16,5 +15,5 @@ export default function SearchPage() {
         <SearchEntries setIsLoadingAction={setIsLoading} />
       </Layout>
     </AuthGuard>
-  )
+  );
 }

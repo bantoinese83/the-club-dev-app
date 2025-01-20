@@ -1,10 +1,17 @@
-'use client'
+'use client';
 import { useRef, useState, useEffect, JSX } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
@@ -32,7 +39,9 @@ interface GoalSettingProps {
   setIsLoadingAction: (isLoading: boolean) => void;
 }
 
-export function GoalSetting({ setIsLoadingAction }: GoalSettingProps): JSX.Element {
+export function GoalSetting({
+  setIsLoadingAction,
+}: GoalSettingProps): JSX.Element {
   const [aiSuggestions, setAiSuggestions] = useState<string[]>([]);
   const { generateGoalSuggestions, isLoading: isAiLoading } = useGeminiAI();
   const { currentUser } = useSelector((state: RootState) => state.user);
@@ -44,7 +53,9 @@ export function GoalSetting({ setIsLoadingAction }: GoalSettingProps): JSX.Eleme
       title: '',
       description: '',
       startDate: new Date().toISOString().split('T')[0],
-      endDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+      endDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+        .toISOString()
+        .split('T')[0],
     },
   });
 
@@ -63,7 +74,10 @@ export function GoalSetting({ setIsLoadingAction }: GoalSettingProps): JSX.Eleme
       name: currentUser?.name,
       email: currentUser?.email,
       streak: currentUser?.streak,
-      recentLogs: logs.slice(0, 5).map((log) => log.content).join('\n'),
+      recentLogs: logs
+        .slice(0, 5)
+        .map((log) => log.content)
+        .join('\n'),
     };
     const suggestions = await generateGoalSuggestions(JSON.stringify(userData));
     if (suggestions) {

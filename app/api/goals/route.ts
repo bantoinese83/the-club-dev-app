@@ -1,38 +1,47 @@
-import { NextResponse } from 'next/server'
-import { cookies } from 'next/headers'
-import prisma from '@/lib/prisma'
+import { NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
+import prisma from '@/lib/prisma';
 
 export async function GET() {
   try {
-    const sessionCookie = (await cookies()).get('session')
-    
+    const sessionCookie = (await cookies()).get('session');
+
     if (!sessionCookie) {
-      return NextResponse.json({ success: false, error: 'Not authenticated' }, { status: 401 })
+      return NextResponse.json(
+        { success: false, error: 'Not authenticated' },
+        { status: 401 },
+      );
     }
 
-    const user = JSON.parse(sessionCookie.value)
+    const user = JSON.parse(sessionCookie.value);
     const goals = await prisma.goal.findMany({
       where: { userId: user.id },
       orderBy: { endDate: 'asc' },
-    })
+    });
 
-    return NextResponse.json({ success: true, goals })
+    return NextResponse.json({ success: true, goals });
   } catch (error) {
-    console.error('Error fetching goals:', error)
-    return NextResponse.json({ success: false, error: 'Failed to fetch goals' }, { status: 500 })
+    console.error('Error fetching goals:', error);
+    return NextResponse.json(
+      { success: false, error: 'Failed to fetch goals' },
+      { status: 500 },
+    );
   }
 }
 
 export async function POST(request: Request) {
   try {
-    const sessionCookie = (await cookies()).get('session')
-    
+    const sessionCookie = (await cookies()).get('session');
+
     if (!sessionCookie) {
-      return NextResponse.json({ success: false, error: 'Not authenticated' }, { status: 401 })
+      return NextResponse.json(
+        { success: false, error: 'Not authenticated' },
+        { status: 401 },
+      );
     }
 
-    const user = JSON.parse(sessionCookie.value)
-    const { title, description, startDate, endDate } = await request.json()
+    const user = JSON.parse(sessionCookie.value);
+    const { title, description, startDate, endDate } = await request.json();
 
     const goal = await prisma.goal.create({
       data: {
@@ -43,12 +52,14 @@ export async function POST(request: Request) {
         status: 'NOT_STARTED',
         userId: user.id,
       },
-    })
+    });
 
-    return NextResponse.json({ success: true, goal })
+    return NextResponse.json({ success: true, goal });
   } catch (error) {
-    console.error('Error creating goal:', error)
-    return NextResponse.json({ success: false, error: 'Failed to create goal' }, { status: 500 })
+    console.error('Error creating goal:', error);
+    return NextResponse.json(
+      { success: false, error: 'Failed to create goal' },
+      { status: 500 },
+    );
   }
 }
-

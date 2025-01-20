@@ -59,4 +59,3 @@ export type ReadonlyDailyLogEntry = Readonly<DailyLogEntry>;
 export type UserProfile = Pick<User, 'name' | 'email' | 'image'>;
 export type DailyLogWithoutTags = Omit<DailyLogEntry, 'tags'>;
 export type TagRecord = Record<string, Tag>;
-

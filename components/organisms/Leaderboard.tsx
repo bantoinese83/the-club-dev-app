@@ -1,11 +1,18 @@
-import { useEffect, useState } from 'react'
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { useEffect, useState } from 'react';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
 
 interface LeaderboardEntry {
-  id: string
-  name: string
-  streak: number
+  id: string;
+  name: string;
+  streak: number;
 }
 
 interface LeaderboardProps {
@@ -13,31 +20,31 @@ interface LeaderboardProps {
 }
 
 export default function Leaderboard({ setIsLoading }: LeaderboardProps) {
-  const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([])
-  const [error, setError] = useState<string | null>(null)
+  const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchLeaderboard = async () => {
-      setIsLoading(true)
+      setIsLoading(true);
       try {
-        const response = await fetch('/api/leaderboard')
-        const data = await response.json()
+        const response = await fetch('/api/leaderboard');
+        const data = await response.json();
         if (data.success) {
-          setLeaderboard(data.leaderboard)
+          setLeaderboard(data.leaderboard);
         } else {
-          setError(data.error)
+          setError(data.error);
         }
       } catch (error) {
-        setError('Failed to fetch leaderboard')
+        setError('Failed to fetch leaderboard');
       } finally {
-        setIsLoading(false)
+        setIsLoading(false);
       }
-    }
+    };
 
-    fetchLeaderboard()
-  }, [setIsLoading])
+    fetchLeaderboard();
+  }, [setIsLoading]);
 
-  if (error) return <div>Error: {error}</div>
+  if (error) return <div>Error: {error}</div>;
 
   return (
     <Card>
@@ -65,5 +72,5 @@ export default function Leaderboard({ setIsLoading }: LeaderboardProps) {
         </Table>
       </CardContent>
     </Card>
-  )
+  );
 }

@@ -1,14 +1,15 @@
-import { Metadata } from 'next'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { LoginForm } from '@/components/LoginForm'
-import { SignUpForm } from '@/components/SignUpForm'
-import { UnsplashImage } from '@/components/UnsplashImage'
-import Layout from '@/components/templates/Layout'
+import { Metadata } from 'next';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { LoginForm } from '@/components/LoginForm';
+import { SignUpForm } from '@/components/SignUpForm';
+import { UnsplashImage } from '@/components/UnsplashImage';
+import Layout from '@/components/templates/Layout';
 
 export const metadata: Metadata = {
   title: 'TheDevClub - Login or Sign Up',
-  description: 'Login or create an account to start tracking your daily progress. Use your email, GitHub, or Google account.',
-}
+  description:
+    'Login or create an account to start tracking your daily progress. Use your email, GitHub, or Google account.',
+};
 
 export default function AuthPage() {
   return (
@@ -33,5 +34,5 @@ export default function AuthPage() {
         </div>
       </div>
     </Layout>
-  )
+  );
 }

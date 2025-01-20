@@ -1,40 +1,48 @@
-'use client'
+'use client';
 
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Skeleton } from "@/components/ui/skeleton"
-import { GitBranch, GitFork, Star, Users } from 'lucide-react'
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { AlertCircle } from 'lucide-react'
-import Layout from '@/components/templates/Layout'
-import { RootState } from '@/lib/store'
-import { setStats, setLoading, setError } from '@/features/github/githubSlice'
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Skeleton } from '@/components/ui/skeleton';
+import { GitBranch, GitFork, Star, Users } from 'lucide-react';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { AlertCircle } from 'lucide-react';
+import Layout from '@/components/templates/Layout';
+import { RootState } from '@/lib/store';
+import { setStats, setLoading, setError } from '@/features/github/githubSlice';
 
 export function GitHubStats() {
-  const dispatch = useDispatch()
-  const { stats, isLoading, error } = useSelector((state: RootState) => state.github)
+  const dispatch = useDispatch();
+  const { stats, isLoading, error } = useSelector(
+    (state: RootState) => state.github,
+  );
 
   useEffect(() => {
-    fetchGitHubStats()
-  }, [])
+    fetchGitHubStats();
+  }, []);
 
   const fetchGitHubStats = async () => {
-    dispatch(setLoading(true))
+    dispatch(setLoading(true));
     try {
-      const response = await fetch('/api/github/stats')
-      const data = await response.json()
+      const response = await fetch('/api/github/stats');
+      const data = await response.json();
       if (data.success) {
-        dispatch(setStats(data.stats))
+        dispatch(setStats(data.stats));
       } else {
-        throw new Error(data.error)
+        throw new Error(data.error);
       }
     } catch (error) {
-      dispatch(setError('Failed to fetch GitHub stats'))
+      dispatch(setError('Failed to fetch GitHub stats'));
     } finally {
-      dispatch(setLoading(false))
+      dispatch(setLoading(false));
     }
-  }
+  };
 
   if (error) {
     return (
@@ -43,7 +51,7 @@ export function GitHubStats() {
         <AlertTitle>Error</AlertTitle>
         <AlertDescription>{error}</AlertDescription>
       </Alert>
-    )
+    );
   }
 
   return (
@@ -89,14 +97,14 @@ export function GitHubStats() {
         </CardContent>
       </Card>
     </Layout>
-  )
+  );
 }
 
 interface StatItemProps {
-  icon: React.ReactNode
-  label: string
-  value: number | undefined
-  isLoading: boolean
+  icon: React.ReactNode;
+  label: string;
+  value: number | undefined;
+  isLoading: boolean;
 }
 
 function StatItem({ icon, label, value, isLoading }: StatItemProps) {
@@ -112,6 +120,5 @@ function StatItem({ icon, label, value, isLoading }: StatItemProps) {
         )}
       </div>
     </div>
-  )
+  );
 }
-

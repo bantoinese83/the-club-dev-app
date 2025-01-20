@@ -1,15 +1,15 @@
-"use client"
+'use client';
 
-import { useState } from 'react'
-import { AuthGuard } from '@/components/AuthGuard'
-import Layout from '@/components/templates/Layout'
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
+import { useState } from 'react';
+import { AuthGuard } from '@/components/AuthGuard';
+import Layout from '@/components/templates/Layout';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 export default function ProfilePage() {
-  const [isLoading] = useState(false)
+  const [isLoading] = useState(false);
 
   return (
     <AuthGuard>
@@ -27,7 +27,11 @@ export default function ProfilePage() {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" defaultValue="john@example.com" />
+                <Input
+                  id="email"
+                  type="email"
+                  defaultValue="john@example.com"
+                />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="bio">Bio</Label>
@@ -43,5 +47,5 @@ export default function ProfilePage() {
         </Card>
       </Layout>
     </AuthGuard>
-  )
+  );
 }

@@ -1,19 +1,19 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { AuthGuard } from '@/components/AuthGuard'
-import Layout from '@/components/templates/Layout'
-import DailyLog from '@/components/DailyLog'
-import GitHubIntegration from '@/components/GitHubIntegration'
-import Badges from '@/components/organisms/Badges'
-import Leaderboard from '@/components/organisms/Leaderboard'
-import { GoalSetting } from '@/components/organisms/GoalSetting'
-import { ProgressTracking } from '@/components/organisms/ProgressTracking'
-import { SearchEntries } from '@/components/organisms/SearchEntries'
-import { LearningRecommendations } from '@/components/organisms/LearningRecommendations'
+import { useState } from 'react';
+import { AuthGuard } from '@/components/AuthGuard';
+import Layout from '@/components/templates/Layout';
+import DailyLog from '@/components/DailyLog';
+import GitHubIntegration from '@/components/GitHubIntegration';
+import Badges from '@/components/organisms/Badges';
+import Leaderboard from '@/components/organisms/Leaderboard';
+import { GoalSetting } from '@/components/organisms/GoalSetting';
+import { ProgressTracking } from '@/components/organisms/ProgressTracking';
+import { SearchEntries } from '@/components/organisms/SearchEntries';
+import { LearningRecommendations } from '@/components/organisms/LearningRecommendations';
 
 export default function DashboardPage() {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <AuthGuard>
@@ -37,5 +37,5 @@ export default function DashboardPage() {
         </div>
       </Layout>
     </AuthGuard>
-  )
+  );
 }

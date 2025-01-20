@@ -1,19 +1,19 @@
-import { Metadata } from 'next'
-import Layout from '@/components/templates/Layout'
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Button } from "@/components/ui/button"
+import { Metadata } from 'next';
+import Layout from '@/components/templates/Layout';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Button } from '@/components/ui/button';
 
 export const metadata: Metadata = {
   title: 'TheDevClub - Contact Us',
   description: 'Get in touch with TheDevClub team',
-}
+};
 
 export default function ContactPage() {
   return (
-      <Layout isLoading={false}>
+    <Layout isLoading={false}>
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold mb-8">Contact Us</h1>
         <div className="grid gap-8 md:grid-cols-2">
@@ -29,7 +29,12 @@ export default function ContactPage() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="email">Email</Label>
-                  <Input id="email" type="email" placeholder="Your email" required />
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="Your email"
+                    required
+                  />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="message">Message</Label>
@@ -57,15 +62,21 @@ export default function ContactPage() {
                   <strong>Phone:</strong> +1 (555) 123-4567
                 </p>
                 <p>
-                  <strong>Address:</strong><br />
-                  123 Developer Street<br />
-                  San Francisco, CA 94105<br />
+                  <strong>Address:</strong>
+                  <br />
+                  123 Developer Street
+                  <br />
+                  San Francisco, CA 94105
+                  <br />
                   United States
                 </p>
                 <p>
-                  <strong>Social Media:</strong><br />
-                  Twitter: @thedevclub<br />
-                  GitHub: github.com/thedevclub<br />
+                  <strong>Social Media:</strong>
+                  <br />
+                  Twitter: @thedevclub
+                  <br />
+                  GitHub: github.com/thedevclub
+                  <br />
                   LinkedIn: linkedin.com/company/thedevclub
                 </p>
               </div>
@@ -74,6 +85,5 @@ export default function ContactPage() {
         </div>
       </div>
     </Layout>
-  )
+  );
 }
-

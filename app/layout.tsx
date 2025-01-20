@@ -1,40 +1,37 @@
-'use client'
+'use client';
 
-import './globals.css'
-import {Inter} from 'next/font/google'
-import {ThemeProvider} from "@/components/theme-provider"
-import ErrorBoundary from '@/components/ErrorBoundary'
-import React from "react"
-import {SidebarProvider} from "@/components/ui/sidebar"
-import {Provider} from 'react-redux'
-import {store} from '@/lib/store'
+import './globals.css';
+import { Inter } from 'next/font/google';
+import { ThemeProvider } from '@/components/theme-provider';
+import ErrorBoundary from '@/components/ErrorBoundary';
+import React from 'react';
+import { SidebarProvider } from '@/components/ui/sidebar';
+import { Provider } from 'react-redux';
+import { store } from '@/lib/store';
 
-const inter = Inter({subsets: ['latin']})
-
+const inter = Inter({ subsets: ['latin'] });
 
 export default function RootLayout({
-                                       children,
-                                   }: {
-    children: React.ReactNode
+  children,
+}: {
+  children: React.ReactNode;
 }) {
-    return (
-        <html lang="en" suppressHydrationWarning>
-        <body className={inter.className}>
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body className={inter.className}>
         <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
         >
-            <ErrorBoundary>
-                <SidebarProvider>
-                    <Provider store={store}>
-                        {children}
-                    </Provider>
-                </SidebarProvider>
-            </ErrorBoundary>
+          <ErrorBoundary>
+            <SidebarProvider>
+              <Provider store={store}>{children}</Provider>
+            </SidebarProvider>
+          </ErrorBoundary>
         </ThemeProvider>
-        </body>
-        </html>
-    )
+      </body>
+    </html>
+  );
 }

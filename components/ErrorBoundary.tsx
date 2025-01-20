@@ -1,31 +1,34 @@
-'use client'
+'use client';
 
-import React, { ErrorInfo } from 'react'
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Button } from "@/components/ui/button"
-import { AlertCircle, RefreshCw } from 'lucide-react'
+import React, { ErrorInfo } from 'react';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Button } from '@/components/ui/button';
+import { AlertCircle, RefreshCw } from 'lucide-react';
 
 interface ErrorBoundaryProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 interface ErrorBoundaryState {
-  hasError: boolean
-  error: Error | null
+  hasError: boolean;
+  error: Error | null;
 }
 
-class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
+class ErrorBoundary extends React.Component<
+  ErrorBoundaryProps,
+  ErrorBoundaryState
+> {
   constructor(props: ErrorBoundaryProps) {
-    super(props)
-    this.state = { hasError: false, error: null }
+    super(props);
+    this.state = { hasError: false, error: null };
   }
 
   static getDerivedStateFromError(error: Error): ErrorBoundaryState {
-    return { hasError: true, error }
+    return { hasError: true, error };
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error("Uncaught error:", error, errorInfo)
+    console.error('Uncaught error:', error, errorInfo);
   }
 
   render() {
@@ -35,7 +38,7 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
           <AlertCircle className="h-4 w-4" />
           <AlertTitle>Something went wrong</AlertTitle>
           <AlertDescription>
-            {this.state.error?.message || "An unexpected error occurred."}
+            {this.state.error?.message || 'An unexpected error occurred.'}
           </AlertDescription>
           <Button
             variant="outline"
@@ -45,12 +48,11 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
             <RefreshCw className="mr-2 h-4 w-4" /> Try again
           </Button>
         </Alert>
-      )
+      );
     }
 
-    return this.props.children
+    return this.props.children;
   }
 }
 
-export default ErrorBoundary
-
+export default ErrorBoundary;

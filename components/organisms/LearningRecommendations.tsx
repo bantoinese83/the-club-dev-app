@@ -1,31 +1,34 @@
-'use client'
+'use client';
 
-import { useState, useEffect } from 'react'
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { useGeminiAI } from '@/hooks/useGeminiAI'
-import { useSelector } from 'react-redux'
-import { RootState } from '@/lib/store'
-import { Loader2, BookOpen } from 'lucide-react'
+import { useState, useEffect } from 'react';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { useGeminiAI } from '@/hooks/useGeminiAI';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/lib/store';
+import { Loader2, BookOpen } from 'lucide-react';
 
 export function LearningRecommendations() {
-  const [recommendations, setRecommendations] = useState<string[]>([])
-  const [isLoading, setIsLoading] = useState(false)
-  const { generateLearningRecommendations } = useGeminiAI()
-  const { logs } = useSelector((state: RootState) => state.dailyLog)
+  const [recommendations, setRecommendations] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const { generateLearningRecommendations } = useGeminiAI();
+  const { logs } = useSelector((state: RootState) => state.dailyLog);
 
   useEffect(() => {
-    generateRecommendations()
-  }, [])
+    generateRecommendations();
+  }, []);
 
   async function generateRecommendations() {
-    setIsLoading(true)
-    const recentLogs = logs.slice(0, 10).map(log => log.content).join('\n')
-    const aiRecommendations = await generateLearningRecommendations(recentLogs)
+    setIsLoading(true);
+    const recentLogs = logs
+      .slice(0, 10)
+      .map((log) => log.content)
+      .join('\n');
+    const aiRecommendations = await generateLearningRecommendations(recentLogs);
     if (aiRecommendations) {
-      setRecommendations(aiRecommendations.split('\n').filter(Boolean))
+      setRecommendations(aiRecommendations.split('\n').filter(Boolean));
     }
-    setIsLoading(false)
+    setIsLoading(false);
   }
 
   return (
@@ -55,6 +58,5 @@ export function LearningRecommendations() {
         )}
       </CardContent>
     </Card>
-  )
+  );
 }
-

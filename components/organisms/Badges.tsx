@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react'
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
-import Image from 'next/image'
+import { useEffect, useState } from 'react';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import Image from 'next/image';
 
 interface Badge {
-  id: string
-  name: string
-  description: string
-  image: string
+  id: string;
+  name: string;
+  description: string;
+  image: string;
 }
 
 interface BadgesProps {
@@ -14,31 +14,31 @@ interface BadgesProps {
 }
 
 export default function Badges({ setIsLoading }: BadgesProps) {
-  const [badges, setBadges] = useState<Badge[]>([])
-  const [error, setError] = useState<string | null>(null)
+  const [badges, setBadges] = useState<Badge[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchBadges = async () => {
-      setIsLoading(true)
+      setIsLoading(true);
       try {
-        const response = await fetch('/api/badges')
-        const data = await response.json()
+        const response = await fetch('/api/badges');
+        const data = await response.json();
         if (data.success) {
-          setBadges(data.badges)
+          setBadges(data.badges);
         } else {
-          setError(data.error)
+          setError(data.error);
         }
       } catch (error) {
-        setError('Failed to fetch badges')
+        setError('Failed to fetch badges');
       } finally {
-        setIsLoading(false)
+        setIsLoading(false);
       }
-    }
+    };
 
-    fetchBadges()
-  }, [setIsLoading])
+    fetchBadges();
+  }, [setIsLoading]);
 
-  if (error) return <div>Error: {error}</div>
+  if (error) return <div>Error: {error}</div>;
 
   return (
     <Card>
@@ -51,15 +51,25 @@ export default function Badges({ setIsLoading }: BadgesProps) {
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
             {badges.map((badge) => (
-              <div key={badge.id} className="flex flex-col items-center text-center">
-                <Image src={badge.image || "/placeholder.svg"} alt={badge.name} width={64} height={64} />
+              <div
+                key={badge.id}
+                className="flex flex-col items-center text-center"
+              >
+                <Image
+                  src={badge.image || '/placeholder.svg'}
+                  alt={badge.name}
+                  width={64}
+                  height={64}
+                />
                 <h3 className="font-semibold mt-2">{badge.name}</h3>
-                <p className="text-sm text-muted-foreground">{badge.description}</p>
+                <p className="text-sm text-muted-foreground">
+                  {badge.description}
+                </p>
               </div>
             ))}
           </div>
         )}
       </CardContent>
     </Card>
-  )
+  );
 }

@@ -1,21 +1,29 @@
-"use client"
+'use client';
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { Home, BarChart2, Target, Search, User, Settings, LogOut } from 'lucide-react'
-import { Button } from "@/components/ui/button"
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import {
+  Home,
+  BarChart2,
+  Target,
+  Search,
+  User,
+  Settings,
+  LogOut,
+} from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
-} from "@/components/ui/sidebar"
-import { useAuth } from '@/hooks/useAuth'
-import { JSX } from "react";
+} from '@/components/ui/sidebar';
+import { useAuth } from '@/hooks/useAuth';
+import { JSX } from 'react';
 
 export function AppSidebar(): JSX.Element {
-  const pathname = usePathname()
-  const { logout } = useAuth()
+  const pathname = usePathname();
+  const { logout } = useAuth();
 
   return (
     <Sidebar className="border-r">
@@ -62,11 +70,15 @@ export function AppSidebar(): JSX.Element {
         </nav>
       </SidebarContent>
       <SidebarFooter>
-        <Button variant="ghost" className="w-full justify-start" onClick={logout}>
+        <Button
+          variant="ghost"
+          className="w-full justify-start"
+          onClick={logout}
+        >
           <LogOut className="h-4 w-4 mr-2" />
           Logout
         </Button>
       </SidebarFooter>
     </Sidebar>
-  )
+  );
 }

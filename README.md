@@ -11,9 +11,9 @@ TheDevClub is a web application for developers to track progress, set goals, and
 ## Table of Contents
 
 - [Installation](#installation)
-    - [System Requirements](#system-requirements)
-    - [Step-by-Step Setup Guide](#step-by-step-setup-guide)
-    - [Environment Variables](#environment-variables)
+  - [System Requirements](#system-requirements)
+  - [Step-by-Step Setup Guide](#step-by-step-setup-guide)
+  - [Environment Variables](#environment-variables)
 - [Usage](#usage)
 - [Features](#features)
 - [Screenshots/Demo](#screenshotsdemo)

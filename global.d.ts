@@ -1,7 +1,6 @@
 // global.d.ts
 declare global {
-    let global: any;
+  let global: any;
 }
 
 export {};
-

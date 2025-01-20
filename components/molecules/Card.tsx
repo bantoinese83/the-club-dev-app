@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
 interface CardProps {
-  title: string
-  children: React.ReactNode
+  title: string;
+  children: React.ReactNode;
 }
 
 export function Card({ title, children }: CardProps) {
@@ -11,6 +11,5 @@ export function Card({ title, children }: CardProps) {
       <h2 className="text-2xl font-semibold mb-4">{title}</h2>
       {children}
     </div>
-  )
+  );
 }
-
