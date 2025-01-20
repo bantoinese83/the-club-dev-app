@@ -45,4 +45,3 @@ export default function Layout({ children, isLoading }: LayoutProps): JSX.Elemen
     </div>
   )
 }
-

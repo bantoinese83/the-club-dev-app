@@ -92,3 +92,16 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* Responsive design rules */
+@media (max-width: 768px) {
+  body {
+    font-size: 0.875rem; /* 14px */
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    font-size: 0.75rem; /* 12px */
+  }
+}
