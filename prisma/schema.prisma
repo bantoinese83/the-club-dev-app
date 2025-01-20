@@ -8,20 +8,22 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String         @id @default(cuid())
   name          String
-  email         String    @unique
+  email         String         @unique
   password      String
   image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
   dailyLogs     DailyLog[]
   githubProfile GithubProfile?
   badges        Badge[]
-  streak        Int       @default(0)
+  streak        Int            @default(0)
   lastLogDate   DateTime?
   goals         Goal[]
   tags          Tag[]
+
+  @@index([email])
 }
 
 model DailyLog {
@@ -33,14 +35,16 @@ model DailyLog {
   user      User     @relation(fields: [userId], references: [id])
   tags      Tag[]
   sentiment String?
+
+  @@index([userId, createdAt])
 }
 
 model GithubProfile {
-  id           String @id @default(cuid())
+  id           String  @id @default(cuid())
   accessToken  String
   refreshToken String?
-  userId       String @unique
-  user         User   @relation(fields: [userId], references: [id])
+  userId       String  @unique
+  user         User    @relation(fields: [userId], references: [id])
 }
 
 model Badge {
@@ -81,4 +85,3 @@ enum GoalStatus {
   IN_PROGRESS
   COMPLETED
 }
-
